@@ -30,12 +30,9 @@ func SortTasks(w http.ResponseWriter, r *http.Request) {
 	}
 
     var sortedTasks = SortTasksInternally(taskReq.Tasks)
+	var formattedTasks = FormatTasks(sortedTasks)
 	w.Header().Set("Content-Type", "application/json")
-    var encoder = json.NewEncoder(w)
-	for _, task := range sortedTasks {
-		outputTask := TaskOutputFormat {Name: task.Name, Command: task.Command}
-		encoder.Encode(outputTask)
-	}
+    json.NewEncoder(w).Encode(formattedTasks)
 }
 
 func SortTasksInternally(tasks []Task) []Task {
@@ -53,4 +50,13 @@ func SortTasksInternally(tasks []Task) []Task {
 		}
 	}
 	return tasks
+}
+
+func FormatTasks(tasks []Task) []TaskOutputFormat {
+	var formattedTasks []TaskOutputFormat
+	for _, task := range tasks {
+		outputTask := TaskOutputFormat {Name: task.Name, Command: task.Command}
+		formattedTasks = append(formattedTasks, outputTask)
+	}
+	return formattedTasks
 }
