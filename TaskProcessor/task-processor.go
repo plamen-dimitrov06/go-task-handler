@@ -22,6 +22,9 @@ type TaskOutputFormat struct {
 	Command string `json:"command"`
 }
 
+/**
+ * @TODO HTTP high level details shouldn't be here. Move them out.
+ */
 func SortTasks(w http.ResponseWriter, r *http.Request) {
 	var taskReq TaskRequest
 	if err := json.NewDecoder(r.Body).Decode(&taskReq); err != nil {
@@ -35,6 +38,9 @@ func SortTasks(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(formattedTasks)
 }
 
+/**
+ * @TODO replace with the sorter implementation
+ */
 func SortTasksInternally(tasks []Task) []Task {
 	for index, task := range tasks {
 		if len(task.Requires) > 0 {
@@ -52,6 +58,9 @@ func SortTasksInternally(tasks []Task) []Task {
 	return tasks
 }
 
+/**
+ * @TODO replace with the formater implementation
+ */
 func FormatTasks(tasks []Task) []TaskOutputFormat {
 	var formattedTasks []TaskOutputFormat
 	for _, task := range tasks {
