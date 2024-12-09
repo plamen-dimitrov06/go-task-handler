@@ -3,3 +3,5 @@ services:
     image: golang
     volumes:
       - .:/go/src
+    ports:
+      - 8080:8080
