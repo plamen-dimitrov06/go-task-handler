@@ -12,7 +12,6 @@ func TestSortExampleTasksCorrectly(t *testing.T) {
 		{Name: "task-2", Command: "cat /tmp/file1",  Requires: []string {"task-3"}},
 		{Name: "task-3", Command: "echo 'Hello World' > /tmp/file1",  Requires: []string {"task-1"}},
 		{Name: "task-4", Command: "rm /tmp/file1",  Requires: []string {"task-2", "task-3"}},
-
 	}
 	// slices are passed by reference (?), 
 	// so we derefence them before passing to the sorting handler
