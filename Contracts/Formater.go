@@ -5,5 +5,5 @@ import (
 )
 
 type Formater interface {
-	Format(tasks []Models.Task) []Models.TaskOutputFormat
+	Format(tasks []Models.Task)
 }
