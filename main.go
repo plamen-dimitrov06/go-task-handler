@@ -9,13 +9,14 @@ import (
 )
 
 func main() {
+    taskSorter := TaskProcessor.TaskSorter{}
     http.HandleFunc("/", func (w http.ResponseWriter, r *http.Request) {
         var taskReq Models.TaskRequest
         if err := json.NewDecoder(r.Body).Decode(&taskReq); err != nil {
             http.Error(w, err.Error(), http.StatusBadRequest)
             return
         }
-        taskSorter := TaskProcessor.TaskSorter{}
+
         taskFormatter := TaskProcessor.TaskFormatter{WebContext: w}
         processor := TaskProcessor.TaskHandler{Sorter: taskSorter, Formatter: taskFormatter}
         processor.ProcessTasks(taskReq.Tasks)
@@ -27,7 +28,7 @@ func main() {
             http.Error(w, err.Error(), http.StatusBadRequest)
             return
         }
-        taskSorter := TaskProcessor.TaskSorter{}
+
         taskFormatter := TaskProcessor.TaskBashFormatter{WebContext: w}
         processor := TaskProcessor.TaskHandler{Sorter: taskSorter, Formatter: taskFormatter}
         processor.ProcessTasks(taskReq.Tasks)
