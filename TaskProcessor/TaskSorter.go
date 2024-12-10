@@ -16,12 +16,11 @@ func (sorter TaskSorter) Sort() []Models.Task {
 	for index, task := range sorter.Tasks {
 		if len(task.Requires) > 0 {
 			for _, requiredTask := range task.Requires {
-				for targetTaskIndex, targetTask := range sorter.Tasks {
-					if n := strings.Compare(requiredTask, targetTask.Name); n == 0 && index < targetTaskIndex {
+				for targetIndex, targetTask := range sorter.Tasks {
+					if n := strings.Compare(requiredTask, targetTask.Name); n == 0 && index < targetIndex {
 						// fmt.Printf("Swapping %s with %s", task.Name, targetTask.Name)
 						// fmt.Println()
-						// @TODO this is too long make it shorter
-						sorter.Tasks[index], sorter.Tasks[targetTaskIndex] = sorter.Tasks[targetTaskIndex], sorter.Tasks[index]
+						sorter.Tasks[index], sorter.Tasks[targetIndex] = sorter.Tasks[targetIndex], sorter.Tasks[index]
 					}
 				}
 			}
