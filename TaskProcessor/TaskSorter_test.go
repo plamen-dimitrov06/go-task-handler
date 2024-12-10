@@ -18,6 +18,7 @@ func TestSortExampleTasksCorrectly(t *testing.T) {
 	// so we derefence them before passing to the sorting handler
 	sut := TaskSorter{Tasks: append([]Models.Task(nil), tasks...)}
 	sortedTasks := sut.Sort()
+	// correct order should be :
 	tasks[1], tasks[2] = tasks[2], tasks[1]
 
 	assert.Equal(t, tasks, sortedTasks);
