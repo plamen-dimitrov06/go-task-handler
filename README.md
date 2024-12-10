@@ -2,8 +2,9 @@
 ## Instructions
 * docker compose up
 * docker compose run go
-* go run server.go
-## TODO
-* ~~create web server~~
-* ~~parse request~~ and sort tasks
-* optionally display output as actual commands instead of json
+* cd src/
+* go run *.go
+## Running tests
+* docker compose run go
+* cd src/TaskProcessor/
+* go test
