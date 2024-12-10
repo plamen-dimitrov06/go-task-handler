@@ -13,6 +13,7 @@ type TaskBashFormatter struct {
 
 func (formatter TaskBashFormatter) Format(tasks []Models.Task) {
 	var formattedTasks []string
+	formattedTasks = append(formattedTasks, "#!/usr/bin/env bash\n")
 	for _, task := range tasks {
 		formattedTasks = append(formattedTasks, task.Command)
 	}
