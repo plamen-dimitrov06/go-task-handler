@@ -6,25 +6,24 @@ import (
 )
 
 type TaskSorter struct {
-	Tasks []Models.Task
 }
 
 /**
  * Sort tasks taking into consideration the required property.
  */
-func (sorter TaskSorter) Sort() []Models.Task {
-	for index, task := range sorter.Tasks {
+func (sorter TaskSorter) Sort(tasks []Models.Task) []Models.Task {
+	for index, task := range tasks {
 		if len(task.Requires) > 0 {
 			for _, requiredTask := range task.Requires {
-				for targetIndex, targetTask := range sorter.Tasks {
+				for targetIndex, targetTask := range tasks {
 					if n := strings.Compare(requiredTask, targetTask.Name); n == 0 && index < targetIndex {
 						// fmt.Printf("Swapping %s with %s", task.Name, targetTask.Name)
 						// fmt.Println()
-						sorter.Tasks[index], sorter.Tasks[targetIndex] = sorter.Tasks[targetIndex], sorter.Tasks[index]
+						tasks[index], tasks[targetIndex] = tasks[targetIndex], tasks[index]
 					}
 				}
 			}
 		}
 	}
-	return sorter.Tasks
+	return tasks
 }

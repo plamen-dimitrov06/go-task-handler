@@ -15,8 +15,8 @@ func TestSortExampleTasksCorrectly(t *testing.T) {
 	}
 	// slices are passed by reference (?), 
 	// so we derefence them before passing to the sorting handler
-	sut := TaskSorter{Tasks: append([]Models.Task(nil), tasks...)}
-	sortedTasks := sut.Sort()
+	sut := TaskSorter{}
+	sortedTasks := sut.Sort(append([]Models.Task(nil), tasks...))
 	// correct order should be :
 	tasks[1], tasks[2] = tasks[2], tasks[1]
 
@@ -29,8 +29,8 @@ func TestSortCorreclyWhenRequiredIsMissing(t *testing.T) {
 		{Name: "task-2", Command: "cat /tmp/file1"},
 	}
 
-	sut := TaskSorter{Tasks: append([]Models.Task(nil), tasks...)}
-	sortedTasks := sut.Sort()
+	sut := TaskSorter{}
+	sortedTasks := sut.Sort(append([]Models.Task(nil), tasks...))
 
 	assert.Equal(t, tasks, sortedTasks);
 }
@@ -44,8 +44,8 @@ func TestComplexDependenciesWithIndependentTasks(t *testing.T) {
         {Name: "task-5", Command: "echo 'Task 5'"},
     }
 
-    sut := TaskSorter{Tasks: append([]Models.Task(nil), tasks...)}
-    sortedTasks := sut.Sort()
+    sut := TaskSorter{}
+    sortedTasks := sut.Sort(append([]Models.Task(nil), tasks...))
 	tasks[1], tasks[2] = tasks[2], tasks[1]
 	assert.Equal(t, tasks, sortedTasks);
 }

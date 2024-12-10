@@ -5,5 +5,5 @@ import (
 )
 
 type Sorter interface {
-	Sort() []Models.Task
+	Sort([]Models.Task) []Models.Task
 }
