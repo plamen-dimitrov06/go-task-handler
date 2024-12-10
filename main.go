@@ -15,9 +15,10 @@ func main() {
             http.Error(w, err.Error(), http.StatusBadRequest)
             return
         }
-        taskSorter := TaskProcessor.TaskSorter{Tasks: taskReq.Tasks}
+        taskSorter := TaskProcessor.TaskSorter{}
         taskFormatter := TaskProcessor.TaskFormatter{WebContext: w}
-        TaskProcessor.ProcessTasks(taskSorter, taskFormatter)
+        processor := TaskProcessor.TaskHandler{Sorter: taskSorter, Formatter: taskFormatter}
+        processor.ProcessTasks(taskReq.Tasks)
     })
 
     http.HandleFunc("/bash", func (w http.ResponseWriter, r *http.Request) {
@@ -26,9 +27,10 @@ func main() {
             http.Error(w, err.Error(), http.StatusBadRequest)
             return
         }
-        taskSorter := TaskProcessor.TaskSorter{Tasks: taskReq.Tasks}
+        taskSorter := TaskProcessor.TaskSorter{}
         taskFormatter := TaskProcessor.TaskBashFormatter{WebContext: w}
-        TaskProcessor.ProcessTasks(taskSorter, taskFormatter)
+        processor := TaskProcessor.TaskHandler{Sorter: taskSorter, Formatter: taskFormatter}
+        processor.ProcessTasks(taskReq.Tasks)
     })
     log.Fatal(http.ListenAndServe(":8080", nil))
 }
