@@ -9,7 +9,7 @@ type TaskSorter struct {
 }
 
 /**
- * Sort tasks taking into consideration the required property.
+ * Sort tasks taking into consideration the "requires" property.
  */
 func (sorter TaskSorter) Sort(tasks []Models.Task) []Models.Task {
 	for index, task := range tasks {
