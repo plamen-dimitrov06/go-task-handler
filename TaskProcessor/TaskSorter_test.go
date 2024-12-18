@@ -13,7 +13,7 @@ func TestSortExampleTasksCorrectly(t *testing.T) {
 		{Name: "task-3", Command: "echo 'Hello World' > /tmp/file1", Requires: []string{"task-1"}},
 		{Name: "task-4", Command: "rm /tmp/file1", Requires: []string{"task-2", "task-3"}},
 	}
-	// slices are passed by reference (?), 
+	// slices are passed by reference (?),
 	// so we derefence them before passing to the sorting handler
 	sut := TaskSorter{}
 	sortedTasks := sut.Sort(append([]Models.Task(nil), tasks...))
