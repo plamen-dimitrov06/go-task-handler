@@ -47,5 +47,5 @@ func TestComplexDependenciesWithIndependentTasks(t *testing.T) {
 	sut := TaskSorter{}
 	sortedTasks := sut.Sort(append([]Models.Task(nil), tasks...))
 	tasks[1], tasks[2] = tasks[2], tasks[1]
-	assert.Equal(t, tasks, sortedTasks);
+	assert.Equal(t, tasks, sortedTasks)
 }
