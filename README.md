@@ -9,3 +9,7 @@ Consume a list of tasks ([example](testdata/tasks.json)) through HTTP and order 
 * docker compose run go
 * cd src/TaskProcessor/
 * go test
+## TODO
+* replace object instance with "new" factory functions
+* make us of TableDrivenTest approach as opposed to AAA
+* change naming of files to lowercase
