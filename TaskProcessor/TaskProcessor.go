@@ -6,7 +6,7 @@ import (
 )
 
 type TaskHandler struct {
-	Sorter Contracts.Sorter
+	Sorter    Contracts.Sorter
 	Formatter Contracts.Formater
 }
 
