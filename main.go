@@ -1,17 +1,17 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
-	"encoding/json"
-	"task-handler/TaskProcessor"
 	"task-handler/Models"
+	"task-handler/TaskProcessor"
 )
 
 func main() {
 	taskReq := Models.TaskRequest{}
 	taskSorter := TaskProcessor.TaskSorter{}
-	http.HandleFunc("/", func (w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if err := json.NewDecoder(r.Body).Decode(&taskReq); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
@@ -22,7 +22,7 @@ func main() {
 		processor.ProcessTasks(taskReq.Tasks)
 	})
 
-	http.HandleFunc("/bash", func (w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/bash", func(w http.ResponseWriter, r *http.Request) {
 		if err := json.NewDecoder(r.Body).Decode(&taskReq); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
