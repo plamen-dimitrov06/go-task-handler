@@ -5,19 +5,19 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"tasksort/internal/tasksort"
 )
 
 func main() {
-	taskReq := Models.TaskRequest{}
-	taskSorter := TaskProcessor.TaskSorter{}
+	taskReq := tasksort.TaskRequest{}
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if err := json.NewDecoder(r.Body).Decode(&taskReq); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
-		taskFormatter := TaskProcessor.TaskFormatter{WebContext: w}
-		processor := TaskProcessor.TaskHandler{Sorter: taskSorter, Formatter: taskFormatter}
+		taskFormatter := tasksort.JSONFormatter{}
+		processor := tasksort.TaskHandler{Formatter: taskFormatter}
 		processor.ProcessTasks(taskReq.Tasks)
 		// @TODO move below to an object/func
 		w.Header().Set("Content-Type", "application/json")
@@ -30,8 +30,8 @@ func main() {
 			return
 		}
 
-		taskFormatter := TaskProcessor.TaskBashFormatter{WebContext: w}
-		processor := TaskProcessor.TaskHandler{Sorter: taskSorter, Formatter: taskFormatter}
+		taskFormatter := tasksort.TaskBashFormatter{WebContext: w}
+		processor := tasksort.TaskHandler{Formatter: taskFormatter}
 		processor.ProcessTasks(taskReq.Tasks)
 		// @TODO move below to an object/func
 		w.Header().Set("Content-Type", "text/html")
