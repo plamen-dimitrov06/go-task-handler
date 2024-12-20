@@ -1,10 +1,10 @@
 package tasksort
 
 type TaskHandler struct {
-	Formatter Formater
+	Formater Formater
 }
 
 func (handler TaskHandler) ProcessTasks(tasks []Task) string {
 	sortedTasks := Sort(tasks)
-	return handler.Formatter.Format(sortedTasks)
+	return handler.Formater.Format(sortedTasks)
 }

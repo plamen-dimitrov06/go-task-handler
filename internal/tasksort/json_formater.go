@@ -4,13 +4,13 @@ import(
 	"encoding/json"
 )
 
-type JSONFormatter struct {
+type JSONFormater struct {
 }
 
 /*
  * JSON implementation for the Formatter interface.
  */
-func (formatter JSONFormatter) Format(tasks []Task) string {
+func (formatter JSONFormater) Format(tasks []Task) string {
 	var formattedTasks []JSONResponse
 	for _, task := range tasks {
 		outputTask := JSONResponse{Name: task.Name, Command: task.Command}

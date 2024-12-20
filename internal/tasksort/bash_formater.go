@@ -4,13 +4,13 @@ import (
 	"strings"
 )
 
-type BashFormatter struct {
+type BashFormater struct {
 }
 
 /*
  * bash/cli implementation for the Formatter interface.
  */
-func (formatter BashFormatter) Format(tasks []Task) string {
+func (formatter BashFormater) Format(tasks []Task) string {
 	var formattedTasks []string
 	formattedTasks = append(formattedTasks, "#!/usr/bin/env bash\n")
 	for _, task := range tasks {
