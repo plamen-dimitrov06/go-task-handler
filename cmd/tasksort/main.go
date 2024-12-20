@@ -19,7 +19,7 @@ func main() {
 		taskFormatter := tasksort.JSONFormater{}
 		processor := tasksort.TaskHandler{Formater: taskFormatter}
 		formattedTasks := processor.ProcessTasks(taskReq.Tasks)
-		// @TODO move below to an object/func
+
 		w.Header().Set("Content-Type", "application/json")
 		fmt.Fprintf(w, "%v", formattedTasks)
 	})
@@ -32,10 +32,10 @@ func main() {
 
 		taskFormatter := tasksort.BashFormater{}
 		processor := tasksort.TaskHandler{Formater: taskFormatter}
-		taskList := processor.ProcessTasks(taskReq.Tasks)
-		// @TODO move below to an object/func
+		formattedTasks := processor.ProcessTasks(taskReq.Tasks)
+
 		w.Header().Set("Content-Type", "text/html")
-		fmt.Fprintf(w, "%v", taskList)
+		fmt.Fprintf(w, "%v", formattedTasks)
 	})
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
