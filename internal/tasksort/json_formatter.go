@@ -10,8 +10,7 @@ type JSONFormatter struct {
 }
 
 func (formatter JSONFormatter) Format(tasks []Task) {
-	// @TODO dont use var in func ctx
-	var formattedTasks []JSONResponse
+	formattedTasks := []JSONResponse
 	for _, task := range tasks {
 		outputTask := JSONResponse{Name: task.Name, Command: task.Command}
 		formattedTasks = append(formattedTasks, outputTask)

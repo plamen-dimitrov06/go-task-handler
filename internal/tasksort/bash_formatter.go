@@ -11,8 +11,7 @@ type BashFormatter struct {
 }
 
 func (formatter BashFormatter) Format(tasks []Task) {
-	// @TODO dont use var in func ctx
-	var formattedTasks []string
+	formattedTasks := []string
 	formattedTasks = append(formattedTasks, "#!/usr/bin/env bash\n")
 
 	for _, task := range tasks {
