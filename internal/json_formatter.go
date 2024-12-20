@@ -11,6 +11,7 @@ type TaskFormatter struct {
 }
 
 func (formatter TaskFormatter) Format(tasks []Models.Task) {
+	// @TODO dont use var in func ctx
 	var formattedTasks []Models.TaskJSONResponse
 	for _, task := range tasks {
 		outputTask := Models.TaskJSONResponse{Name: task.Name, Command: task.Command}

@@ -12,6 +12,7 @@ type TaskBashFormatter struct {
 }
 
 func (formatter TaskBashFormatter) Format(tasks []Models.Task) {
+	// @TODO dont use var in func ctx
 	var formattedTasks []string
 	formattedTasks = append(formattedTasks, "#!/usr/bin/env bash\n")
 
