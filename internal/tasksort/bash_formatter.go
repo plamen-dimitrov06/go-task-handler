@@ -16,5 +16,6 @@ func (formatter BashFormatter) Format(tasks []Task) string{
 	for _, task := range tasks {
 		formattedTasks = append(formattedTasks, task.Command)
 	}
-	return taskList := strings.Join(formattedTasks, "\n")
+	taskList := strings.Join(formattedTasks, "\n")
+	return taskList
 }
