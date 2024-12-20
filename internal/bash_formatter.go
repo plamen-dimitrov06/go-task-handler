@@ -4,14 +4,13 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
-	"task-handler/Models"
 )
 
 type TaskBashFormatter struct {
 	WebContext http.ResponseWriter
 }
 
-func (formatter TaskBashFormatter) Format(tasks []Models.Task) {
+func (formatter TaskBashFormatter) Format(tasks []Task) {
 	// @TODO dont use var in func ctx
 	var formattedTasks []string
 	formattedTasks = append(formattedTasks, "#!/usr/bin/env bash\n")
