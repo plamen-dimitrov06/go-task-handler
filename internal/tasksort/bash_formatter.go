@@ -6,11 +6,11 @@ import (
 	"strings"
 )
 
-type TaskBashFormatter struct {
+type BashFormatter struct {
 	WebContext http.ResponseWriter
 }
 
-func (formatter TaskBashFormatter) Format(tasks []Task) {
+func (formatter BashFormatter) Format(tasks []Task) {
 	// @TODO dont use var in func ctx
 	var formattedTasks []string
 	formattedTasks = append(formattedTasks, "#!/usr/bin/env bash\n")

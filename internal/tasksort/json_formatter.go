@@ -5,15 +5,15 @@ import (
 	"net/http"
 )
 
-type TaskFormatter struct {
+type JSONFormatter struct {
 	WebContext http.ResponseWriter
 }
 
-func (formatter TaskFormatter) Format(tasks []Task) {
+func (formatter JSONFormatter) Format(tasks []Task) {
 	// @TODO dont use var in func ctx
-	var formattedTasks []TaskJSONResponse
+	var formattedTasks []JSONResponse
 	for _, task := range tasks {
-		outputTask := TaskJSONResponse{Name: task.Name, Command: task.Command}
+		outputTask := JSONResponse{Name: task.Name, Command: task.Command}
 		formattedTasks = append(formattedTasks, outputTask)
 	}
 	formatter.WebContext.Header().Set("Content-Type", "application/json")
