@@ -1,4 +1,4 @@
-package Models
+package tasksort
 
 type TaskJSONResponse struct {
 	Name    string `json:"name"`

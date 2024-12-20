@@ -1,4 +1,4 @@
-module task-sort
+module tasksort
 
 go 1.17
 

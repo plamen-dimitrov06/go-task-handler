@@ -1,4 +1,4 @@
-package TaskProcessor
+package tasksort
 
 import (
 	"fmt"
