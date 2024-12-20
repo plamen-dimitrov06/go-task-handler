@@ -18,6 +18,9 @@ func main() {
 		taskFormatter := TaskProcessor.TaskFormatter{WebContext: w}
 		processor := TaskProcessor.TaskHandler{Sorter: taskSorter, Formatter: taskFormatter}
 		processor.ProcessTasks(taskReq.Tasks)
+		// @TODO move below to an object/func
+		formatter.WebContext.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(formatter.WebContext).Encode(formattedTasks)
 	})
 
 	http.HandleFunc("/bash", func(w http.ResponseWriter, r *http.Request) {
@@ -29,6 +32,9 @@ func main() {
 		taskFormatter := TaskProcessor.TaskBashFormatter{WebContext: w}
 		processor := TaskProcessor.TaskHandler{Sorter: taskSorter, Formatter: taskFormatter}
 		processor.ProcessTasks(taskReq.Tasks)
+		// @TODO move below to an object/func
+		formatter.WebContext.Header().Set("Content-Type", "text/html")
+		fmt.Fprintf(formatter.WebContext, "%v", taskList)
 	})
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
