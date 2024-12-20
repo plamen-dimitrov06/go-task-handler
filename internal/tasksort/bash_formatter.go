@@ -1,8 +1,6 @@
 package tasksort
 
 import (
-	"fmt"
-	"net/http"
 	"strings"
 )
 

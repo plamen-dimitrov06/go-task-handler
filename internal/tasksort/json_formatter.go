@@ -1,10 +1,5 @@
 package tasksort
 
-import (
-	"encoding/json"
-	"net/http"
-)
-
 type JSONFormatter struct {
 }
 
