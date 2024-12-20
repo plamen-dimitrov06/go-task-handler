@@ -1,5 +1,5 @@
 package tasksort
 
 type Formater interface {
-	Format(tasks []Models.Task)
+	Format(tasks []Task)
 }
