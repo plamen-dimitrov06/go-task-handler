@@ -16,12 +16,11 @@ func main() {
 			return
 		}
 
-		JSONFormater := tasksort.JSONFormater{}
-		processor := tasksort.TaskHandler{Formater: JSONFormater}
-		formattedTasks := processor.ProcessTasks(taskReq.Tasks)
+		processor := tasksort.NewJSONProcessor()
+		sortedTasks := processor.ProcessTasks(taskReq.Tasks)
 
 		w.Header().Set("Content-Type", "application/json")
-		fmt.Fprintf(w, "%v", formattedTasks)
+		fmt.Fprintf(w, "%v", sortedTasks)
 	})
 
 	http.HandleFunc("/bash", func(w http.ResponseWriter, r *http.Request) {
@@ -30,12 +29,11 @@ func main() {
 			return
 		}
 
-		bashFormater := tasksort.BashFormater{}
-		processor := tasksort.TaskHandler{Formater: bashFormater}
-		formattedTasks := processor.ProcessTasks(taskReq.Tasks)
+		processor := tasksort.NewBashProcessor()
+		sortedTasks := processor.ProcessTasks(taskReq.Tasks)
 
 		w.Header().Set("Content-Type", "text/html")
-		fmt.Fprintf(w, "%v", formattedTasks)
+		fmt.Fprintf(w, "%v", sortedTasks)
 	})
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
