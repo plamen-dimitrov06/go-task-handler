@@ -4,7 +4,7 @@ type TaskHandler struct {
 	Formatter Formater
 }
 
-func (handler TaskHandler) ProcessTasks(tasks []Task) {
+func (handler TaskHandler) ProcessTasks(tasks []Task) string {
 	sortedTasks := Sort(tasks)
-	handler.Formatter.Format(sortedTasks)
+	return handler.Formatter.Format(sortedTasks)
 }
