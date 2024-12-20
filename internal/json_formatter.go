@@ -3,18 +3,17 @@ package TaskProcessor
 import (
 	"encoding/json"
 	"net/http"
-	"task-handler/Models"
 )
 
 type TaskFormatter struct {
 	WebContext http.ResponseWriter
 }
 
-func (formatter TaskFormatter) Format(tasks []Models.Task) {
+func (formatter TaskFormatter) Format(tasks []Task) {
 	// @TODO dont use var in func ctx
-	var formattedTasks []Models.TaskJSONResponse
+	var formattedTasks []TaskJSONResponse
 	for _, task := range tasks {
-		outputTask := Models.TaskJSONResponse{Name: task.Name, Command: task.Command}
+		outputTask := TaskJSONResponse{Name: task.Name, Command: task.Command}
 		formattedTasks = append(formattedTasks, outputTask)
 	}
 	formatter.WebContext.Header().Set("Content-Type", "application/json")

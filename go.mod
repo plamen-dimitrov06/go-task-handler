@@ -1,4 +1,4 @@
-module task-handler
+module task-sort
 
 go 1.17
 
