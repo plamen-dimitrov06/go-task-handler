@@ -1,17 +1,13 @@
-package TaskProcessor
+package tasksort
 
 import (
 	"strings"
-	"task-handler/Models"
 )
-
-type TaskSorter struct {
-}
 
 /**
  * Sort tasks taking into consideration the "requires" property.
  */
-func (sorter TaskSorter) Sort(tasks []Models.Task) []Models.Task {
+func Sort(tasks []Task) []Task {
 	for index, task := range tasks {
 		if len(task.Requires) > 0 {
 			for _, requiredTask := range task.Requires {
