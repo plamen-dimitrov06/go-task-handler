@@ -16,8 +16,8 @@ func main() {
 			return
 		}
 
-		taskFormatter := tasksort.JSONFormater{}
-		processor := tasksort.TaskHandler{Formater: taskFormatter}
+		JSONFormater := tasksort.JSONFormater{}
+		processor := tasksort.TaskHandler{Formater: JSONFormater}
 		formattedTasks := processor.ProcessTasks(taskReq.Tasks)
 
 		w.Header().Set("Content-Type", "application/json")
@@ -30,8 +30,8 @@ func main() {
 			return
 		}
 
-		taskFormatter := tasksort.BashFormater{}
-		processor := tasksort.TaskHandler{Formater: taskFormatter}
+		bashFormater := tasksort.BashFormater{}
+		processor := tasksort.TaskHandler{Formater: bashFormater}
 		formattedTasks := processor.ProcessTasks(taskReq.Tasks)
 
 		w.Header().Set("Content-Type", "text/html")
