@@ -8,6 +8,9 @@ import (
 type JSONFormatter struct {
 }
 
+/*
+ * JSON implementation for the Formatter interface.
+ */
 func (formatter JSONFormatter) Format(tasks []Task) []JSONResponse {
 	formattedTasks := []JSONResponse
 	for _, task := range tasks {

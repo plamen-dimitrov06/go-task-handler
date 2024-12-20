@@ -9,6 +9,9 @@ import (
 type BashFormatter struct {
 }
 
+/*
+ * bash/cli implementation for the Formatter interface.
+ */
 func (formatter BashFormatter) Format(tasks []Task) string{
 	formattedTasks := []string
 	formattedTasks = append(formattedTasks, "#!/usr/bin/env bash\n")
