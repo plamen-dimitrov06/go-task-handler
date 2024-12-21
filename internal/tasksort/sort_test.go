@@ -7,10 +7,10 @@ import (
 
 func TestSortExampleTasksCorrectly(t *testing.T) {
 	tests := map[string]struct {
-		input []Task
+		input  []Task
 		result []Task
-	} {
-		"sort the given example tasks correctly":  {
+	}{
+		"sort the given example tasks correctly": {
 			input: []Task{
 				{Name: "task-1", Command: "touch /tmp/file1"},
 				{Name: "task-2", Command: "cat /tmp/file1", Requires: []string{"task-3"}},
@@ -51,7 +51,7 @@ func TestSortExampleTasksCorrectly(t *testing.T) {
 			},
 		},
 	}
-	  
+
 	for name, test := range tests {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()

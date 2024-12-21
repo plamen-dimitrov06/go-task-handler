@@ -14,7 +14,6 @@ func NewJSONProcessor() TaskHandler {
 	return TaskHandler{formater: JSONFormater}
 }
 
-
 func NewBashProcessor() TaskHandler {
 	bashFormater := BashFormater{}
 	return TaskHandler{formater: bashFormater}

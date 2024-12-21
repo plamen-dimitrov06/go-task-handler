@@ -1,6 +1,6 @@
 package tasksort
 
-import(
+import (
 	"encoding/json"
 )
 
