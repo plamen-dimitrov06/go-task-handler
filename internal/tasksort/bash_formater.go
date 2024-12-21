@@ -8,7 +8,7 @@ type BashFormater struct {
 }
 
 /*
- * bash/cli implementation for the Formatter interface.
+ * bash/cli implementation for the Formater interface.
  */
 func (formatter BashFormater) Format(tasks []Task) string {
 	var formattedTasks []string

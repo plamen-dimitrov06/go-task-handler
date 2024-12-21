@@ -8,7 +8,7 @@ type JSONFormater struct {
 }
 
 /*
- * JSON implementation for the Formatter interface.
+ * JSON implementation for the Formater interface.
  */
 func (formatter JSONFormater) Format(tasks []Task) string {
 	var formattedTasks []JSONResponse
