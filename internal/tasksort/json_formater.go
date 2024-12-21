@@ -19,3 +19,5 @@ func (formatter JSONFormater) Format(tasks []Task) string {
 	t, _ := json.Marshal(formattedTasks)
 	return string(t)
 }
+
+func NewJSONFormater() JSONFormater { return JSONFormater{} }
