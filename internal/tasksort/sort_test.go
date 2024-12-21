@@ -1,4 +1,4 @@
-package TaskProcessor
+package tasksort
 
 import (
 	"github.com/stretchr/testify/assert"
