@@ -3,13 +3,9 @@ Consume a list of tasks ([example](testdata/tasks.json)) through HTTP and order 
 ## Instructions
 * docker compose up
 * docker compose run go
-* cd src/
+* cd src/cmd/tasksort
 * go run *.go
 ## Running tests
 * docker compose run go
-* cd src/TaskProcessor/
+* cd src/internal/tasksort
 * go test
-## TODO
-* replace object instance with "new" factory functions
-* make use of TableDrivenTest approach as opposed to AAA
-* change naming of files to lowercase

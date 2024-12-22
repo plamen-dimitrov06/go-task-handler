@@ -10,12 +10,11 @@ func (handler TaskHandler) ProcessTasks(tasks []Task) string {
 }
 
 func NewJSONProcessor() TaskHandler {
-	JSONFormater := JSONFormater{}
+	JSONFormater := NewJSONFormater()
 	return TaskHandler{formater: JSONFormater}
 }
 
-
 func NewBashProcessor() TaskHandler {
-	bashFormater := BashFormater{}
+	bashFormater := NewBashFormater()
 	return TaskHandler{formater: bashFormater}
 }

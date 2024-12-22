@@ -19,3 +19,5 @@ func (formatter BashFormater) Format(tasks []Task) string {
 	taskList := strings.Join(formattedTasks, "\n")
 	return taskList
 }
+
+func NewBashFormater() BashFormater { return BashFormater{} }

@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	taskReq := tasksort.TaskRequest{}
+	taskReq := tasksort.NewTaskRequest()
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if err := json.NewDecoder(r.Body).Decode(&taskReq); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)

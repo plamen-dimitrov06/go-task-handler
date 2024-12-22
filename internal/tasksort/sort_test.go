@@ -2,50 +2,62 @@ package tasksort
 
 import (
 	"github.com/stretchr/testify/assert"
-	"task-handler/Models"
 	"testing"
 )
 
 func TestSortExampleTasksCorrectly(t *testing.T) {
-	tasks := []Models.Task{
-		{Name: "task-1", Command: "touch /tmp/file1"},
-		{Name: "task-2", Command: "cat /tmp/file1", Requires: []string{"task-3"}},
-		{Name: "task-3", Command: "echo 'Hello World' > /tmp/file1", Requires: []string{"task-1"}},
-		{Name: "task-4", Command: "rm /tmp/file1", Requires: []string{"task-2", "task-3"}},
+	tests := map[string]struct {
+		input  []Task
+		expected []Task
+	}{
+		"sort the given example tasks correctly": {
+			input: []Task{
+				{Name: "task-1", Command: "touch /tmp/file1"},
+				{Name: "task-2", Command: "cat /tmp/file1", Requires: []string{"task-3"}},
+				{Name: "task-3", Command: "echo 'Hello World' > /tmp/file1", Requires: []string{"task-1"}},
+				{Name: "task-4", Command: "rm /tmp/file1", Requires: []string{"task-2", "task-3"}},
+			},
+			expected: []Task{
+				{Name: "task-1", Command: "touch /tmp/file1"},
+				{Name: "task-3", Command: "echo 'Hello World' > /tmp/file1", Requires: []string{"task-1"}},
+				{Name: "task-2", Command: "cat /tmp/file1", Requires: []string{"task-3"}},
+				{Name: "task-4", Command: "rm /tmp/file1", Requires: []string{"task-2", "task-3"}},
+			},
+		},
+		"sorting tasks without dependencies retains the original order": {
+			input: []Task{
+				{Name: "task-1", Command: "touch /tmp/file1"},
+				{Name: "task-2", Command: "cat /tmp/file1"},
+			},
+			expected: []Task{
+				{Name: "task-1", Command: "touch /tmp/file1"},
+				{Name: "task-2", Command: "cat /tmp/file1"},
+			},
+		},
+		"sort copmlex dependencies combined with independent tasks": {
+			input: []Task{
+				{Name: "task-1", Command: "echo 'Task 1'"},
+				{Name: "task-2", Command: "echo 'Task 2'", Requires: []string{"task-3"}},
+				{Name: "task-3", Command: "echo 'Task 3'"},
+				{Name: "task-4", Command: "echo 'Task 4'", Requires: []string{"task-2", "task-3"}},
+				{Name: "task-5", Command: "echo 'Task 5'"},
+			},
+			expected: []Task{
+				{Name: "task-1", Command: "echo 'Task 1'"},
+				{Name: "task-3", Command: "echo 'Task 3'"},
+				{Name: "task-2", Command: "echo 'Task 2'", Requires: []string{"task-3"}},
+				{Name: "task-4", Command: "echo 'Task 4'", Requires: []string{"task-2", "task-3"}},
+				{Name: "task-5", Command: "echo 'Task 5'"},
+			},
+		},
 	}
-	// slices are passed by reference (?),
-	// so we derefence them before passing to the sorting handler
-	sut := TaskSorter{}
-	sortedTasks := sut.Sort(append([]Models.Task(nil), tasks...))
-	// correct order should be :
-	tasks[1], tasks[2] = tasks[2], tasks[1]
 
-	assert.Equal(t, tasks, sortedTasks)
-}
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+			actual := Sort(test.input)
 
-func TestSortCorreclyWhenRequiredIsMissing(t *testing.T) {
-	tasks := []Models.Task{
-		{Name: "task-1", Command: "touch /tmp/file1"},
-		{Name: "task-2", Command: "cat /tmp/file1"},
+			assert.Equal(t, test.expected, actual)
+		})
 	}
-
-	sut := TaskSorter{}
-	sortedTasks := sut.Sort(append([]Models.Task(nil), tasks...))
-
-	assert.Equal(t, tasks, sortedTasks)
-}
-
-func TestComplexDependenciesWithIndependentTasks(t *testing.T) {
-	tasks := []Models.Task{
-		{Name: "task-1", Command: "echo 'Task 1'"},
-		{Name: "task-2", Command: "echo 'Task 2'", Requires: []string{"task-3"}},
-		{Name: "task-3", Command: "echo 'Task 3'"},
-		{Name: "task-4", Command: "echo 'Task 4'", Requires: []string{"task-2", "task-3"}},
-		{Name: "task-5", Command: "echo 'Task 5'"},
-	}
-
-	sut := TaskSorter{}
-	sortedTasks := sut.Sort(append([]Models.Task(nil), tasks...))
-	tasks[1], tasks[2] = tasks[2], tasks[1]
-	assert.Equal(t, tasks, sortedTasks)
 }
