@@ -10,13 +10,13 @@ type JSONFormater struct {
 /*
  * JSON implementation for the Formater interface.
  */
-func (formater JSONFormater) Format(tasks []Task) string {
-	var formatedTasks []JSONResponse
+func (formatter JSONFormater) Format(tasks []Task) string {
+	var formattedTasks []JSONResponse
 	for _, task := range tasks {
 		outputTask := JSONResponse{Name: task.Name, Command: task.Command}
-		formatedTasks = append(formatedTasks, outputTask)
+		formattedTasks = append(formattedTasks, outputTask)
 	}
-	t, _ := json.Marshal(formatedTasks)
+	t, _ := json.Marshal(formattedTasks)
 	return string(t)
 }
 

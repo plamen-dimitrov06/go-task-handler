@@ -10,13 +10,13 @@ type BashFormater struct {
 /*
  * bash/cli implementation for the Formater interface.
  */
-func (formater BashFormater) Format(tasks []Task) string {
-	var formatedTasks []string
-	formatedTasks = append(formatedTasks, "#!/usr/bin/env bash\n")
+func (formatter BashFormater) Format(tasks []Task) string {
+	var formattedTasks []string
+	formattedTasks = append(formattedTasks, "#!/usr/bin/env bash\n")
 	for _, task := range tasks {
-		formatedTasks = append(formatedTasks, task.Command)
+		formattedTasks = append(formattedTasks, task.Command)
 	}
-	taskList := strings.Join(formatedTasks, "\n")
+	taskList := strings.Join(formattedTasks, "\n")
 	return taskList
 }
 
